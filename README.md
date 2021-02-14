@@ -4,7 +4,7 @@ Trabajo práctico para la diplomatura en programación web full stack con react 
 
 ### Como ejecuto en Local? 📋
 
-_Necesitarás tener instalado ```node.js```
+_Necesitarás tener instalado_ ```node.js```
 
 ```
 npm install # instalar las dependencias
