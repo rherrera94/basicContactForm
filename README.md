@@ -14,6 +14,7 @@ _Necesitarás tener instalado_ ```node.js```
 npm install # instalar las dependencias
 npm install mysql #instalar mysql
 npm install express #instalar express
+npm install dotenv #Para variables de entorno
 ```
 
 ### Acepto Pull request? 🔧
