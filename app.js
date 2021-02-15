@@ -1,7 +1,7 @@
 
 const express= require('express');
 const app=express();
-
+require('dotenv').config();
 app.use(express.static('contact'));
 app.use(express.urlencoded({ extended: true }));
 
@@ -9,10 +9,10 @@ app.use(express.urlencoded({ extended: true }));
 
 var mysql=require('mysql');
 var conexion= mysql.createConnection({
-    host:'localhost',
-    user:'rafa',
-    password:'rafa',
-    database:'diplomado'
+    host: process.env.APP_HOST,
+    user:process.env.APP_USER,
+    password:process.env.APP_KEY,
+    database:process.env.APP_DB
 });
 conexion.connect();
 
