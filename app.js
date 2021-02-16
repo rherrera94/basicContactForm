@@ -1,12 +1,15 @@
 
 const express= require('express');
 const app=express();
+
 require('dotenv').config();
+
 app.use(express.static('contact'));
 app.use(express.urlencoded({ extended: true }));
 
-/***************Conexión a base de datos local************************/
-
+/********************CONEXIÓN A BASE DE DATOS*************************/
+/*   Se utilizan variables de entorno para ocultar datos sensibles.  */
+/*********************************************************************/
 var mysql=require('mysql');
 var conexion= mysql.createConnection({
     host: process.env.APP_HOST,
@@ -19,6 +22,7 @@ conexion.connect();
 /*********************************************************************/
 
 app.get('/Listado',(req,res)=>{
+    
     conexion.query('SELECT * FROM mensaje',function(error,registros){
         
         if(error){
@@ -56,7 +60,7 @@ app.post('/formContact',(req,res)=>{
         
         res.send (`debe ingresar toda la informacion para poder enviar un mensaje <a href=/index.html>Volver</a>`);
         return;
-
+    
     }
     
     //si no falto ninguno lo agrego en la base de datos.
