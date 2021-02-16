@@ -72,12 +72,16 @@ app.post('/formContact',(req,res)=>{
         // sino envia el mensaje de que ya se envio el mensaje
         
         if (error){ 
+   
             res.send("Error en la consulta");
             return;
+   
         }
         
         if(registros.length!=0){
+   
             res.send(`mensaje enviado <a href=/index.html>Volver</a>`);
+   
         }
     });
     
