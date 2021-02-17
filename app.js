@@ -17,7 +17,19 @@ var conexion= mysql.createConnection({
     password:process.env.APP_KEY,
     database:process.env.APP_DB
 });
-conexion.connect();
+
+conexion.connect((error)=>{
+    
+    if(error){
+
+        console.log("Error en la conexion a la Base de datos");
+        return;
+            
+    }
+
+});
+    
+
 
 /*********************************************************************/
 
@@ -87,6 +99,6 @@ app.post('/formContact',(req,res)=>{
     
 });
 
-app.listen(5500,()=>{
-    console.log('puerto 5500');
+app.listen(process.env.PORT,()=>{
+    console.log('puerto '+ process.env.PORT);
 });
