@@ -18,13 +18,13 @@ var conexion= mysql.createConnection({
     database:process.env.APP_DB
 });
 
-conexion.connect((error)=>{
+conexion.connect((error,response)=>{
     
     if(error){
-
+        
         console.log("Error en la conexion a la Base de datos");
         return;
-            
+
     }
 
 });
