@@ -1,5 +1,6 @@
 
 const express= require('express');
+const util=require ('util'); // no se necesita instalarla
 const app=express();
 
 require('dotenv').config();
@@ -18,7 +19,7 @@ var conexion= mysql.createConnection({
     database:process.env.APP_DB
 });
 
-conexion.connect((error,response)=>{
+conexion.connect((error)=>{
     
     if(error){
         
@@ -29,13 +30,13 @@ conexion.connect((error,response)=>{
 
 });
     
-
+const qy= util.promisify(conexion.query).bind(conexion); //permitira el uso de async-await en la conexion mysql
 
 /*********************************************************************/
 
-app.get('/Listado',(req,res)=>{
+app.get('/Listado',async (req,res)=>{
     
-    conexion.query('SELECT * FROM mensaje',function(error,registros){
+    await qy ('SELECT * FROM mensaje',function(error,registros){
         
         if(error){
             res.send (`Error en la consulta <a href=/index.html>Volver</a>`);
@@ -64,7 +65,7 @@ app.get('/Listado',(req,res)=>{
 
 /*********************************************************************/
 
-app.post('/formContact',(req,res)=>{
+app.post('/formContact',async (req,res)=>{
 
     //tomo los datos provenientes del formulario y reviso que no falte ninguno
 
@@ -77,7 +78,7 @@ app.post('/formContact',(req,res)=>{
     
     //si no falto ninguno lo agrego en la base de datos.
     
-    conexion.query('INSERT INTO mensaje (mensaje,nombre,apellido,celular,mail) values (?)',[[req.body.mensaje,req.body.nombre,req.body.apellido,req.body.celular, req.body.mail]],
+    await qy('INSERT INTO mensaje (mensaje,nombre,apellido,celular,mail) values (?)',[[req.body.mensaje,req.body.nombre,req.body.apellido,req.body.celular, req.body.mail]],
     function (error,registros){
         
         // en el caso de que exista algun tipo de error en el INSERT lo que va a pasar que es va a tirar error
