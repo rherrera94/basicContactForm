@@ -48,7 +48,7 @@ app.get('/Listado',async (req,res)=>{
 
             registros.forEach(element => {
                 //a la tabla que forme le voy agregando cada uno de los elementos que necesito mostrar
-                //
+                //por pantalla
                 tablahtml+=`<br>`+element.id+`<br> nombre: `+element.nombre+`<br> apellido: `+element.apellido;
                 tablahtml+=`<br> celular: `+ element.celular+`<br> mail: `+element.mail+`<br> Mensaje:<br> `+element.mensaje+`<br><br>`;
 
